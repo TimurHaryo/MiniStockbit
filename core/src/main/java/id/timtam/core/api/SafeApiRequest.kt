@@ -19,28 +19,28 @@ open class SafeApiRequest : ApiRequest {
             when {
                 response.isTotallySuccess() -> Either.Success(response.body()!!)
                 response.hasEmptyBody() -> parseError(
-                    Failure((RequestsResult.DATA_NOT_MATCH), Throwable("Empty Body"))
+                    Failure(response.code(), Throwable(response.message()))
                 )
                 response.code() in 300..599 -> parseError(
-                    Failure(RequestsResult.SERVER_ERROR, Throwable("\"[${response.code()}] - [${response.message()}]\""))
+                    Failure(response.code(), Throwable(response.message()))
                 )
                 else -> parseError(
-                    Failure(RequestsResult.UNKNOWN_ERROR, Throwable("Unknown error from server"))
+                    Failure(response.code(), Throwable(response.message()))
                 )
             }
         } catch (throwable: Throwable) {
             when(throwable) {
                 is UnknownHostException -> parseError(
-                    Failure(RequestsResult.NO_CONNECTION,Throwable("Network problem"))
+                    Failure(RequestsResult.NO_CONNECTION, throwable)
                 )
                 is ConnectException -> parseError(
-                    Failure(RequestsResult.NO_CONNECTION,throwable)
+                    Failure(RequestsResult.NO_CONNECTION, throwable)
                 )
                 is SocketTimeoutException -> parseError(
-                    Failure(RequestsResult.TIMEOUT,throwable)
+                    Failure(RequestsResult.TIMEOUT, throwable)
                 )
                 else -> parseError(
-                    Failure(RequestsResult.UNKNOWN_ERROR,throwable)
+                    Failure(RequestsResult.UNKNOWN_ERROR, throwable)
                 )
             }
         }
