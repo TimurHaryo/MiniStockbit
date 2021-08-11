@@ -5,14 +5,13 @@ import android.view.ViewGroup
 import com.github.ajalt.timberkt.d
 import com.github.ajalt.timberkt.e
 import id.timtam.core.abstraction.BaseFragmentBinding
-import id.timtam.core.extension.gone
-import id.timtam.core.extension.snack
-import id.timtam.core.extension.visible
+import id.timtam.core.extension.*
 import id.timtam.core.util.Paginator
 import id.timtam.core.util.PagingConstants
 import id.timtam.ministockbit.databinding.FragmentTopTierBinding
 import id.timtam.ministockbit.domain.model.TopTierVolume
 import id.timtam.ministockbit.ui.toptier.adapter.TopTierAdapter
+import id.timtam.widget.recyclerview.DividerItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
@@ -35,11 +34,20 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
             setTopTierResultAction()
             paginator?.let { addOnScrollListener(it) }
         }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            renewData()
+        }
     }
 
     override fun doOnceWhenDisplayed() {
         d { "FRAG: Resumed/Displayed" }
         renewData()
+    }
+
+    override fun toBeCleared() {
+        paginator = null
+        binding.rvTopTier.adapter = null
     }
 
     private fun setPaginator() {
@@ -58,12 +66,14 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
             when(state) {
                 is TopTierViewModel.TopTierUI.Loading -> {
                     with(binding) {
+                        swipeRefreshLayout.disable()
                         layoutTopTierError.root.gone()
                         progressBar.visible()
                     }
                 }
                 is TopTierViewModel.TopTierUI.Success -> {
                     with(binding) {
+                        swipeRefreshLayout.enable()
                         layoutTopTierError.root.gone()
                         progressBar.gone()
                     }
@@ -71,6 +81,7 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
                 }
                 is TopTierViewModel.TopTierUI.Failed -> {
                     with(binding) {
+                        swipeRefreshLayout.disable()
                         progressBar.gone()
                         layoutTopTierError.root.visible()
                         layoutTopTierError.btnRetry.setOnClickListener {
@@ -84,6 +95,7 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
     }
 
     private fun renewData() {
+        binding.swipeRefreshLayout.isRefreshing = false
         paginator?.reset()
         topTierAdapter.clearData()
         updateData(1)
@@ -103,6 +115,7 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
         }
 
         with(binding.rvTopTier) {
+            addItemDecoration(DividerItemDecoration(requireContext()))
             adapter = topTierAdapter
             setHasFixedSize(true)
         }
