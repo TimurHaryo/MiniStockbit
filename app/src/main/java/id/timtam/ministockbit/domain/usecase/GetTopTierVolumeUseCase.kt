@@ -13,7 +13,7 @@ class GetTopTierVolumeUseCase(
     data class Query(
         val page: Int,
         val limit: Int,
-        val tsym: String
+        val tsym: String = "USD"
     )
 
     override suspend fun run(param: Query): Either<Failure, List<TopTierVolume>> {
