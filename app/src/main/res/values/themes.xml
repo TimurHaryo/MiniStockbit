@@ -13,10 +13,8 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
         <!-- Customize your theme here. -->
-        <item name="android:textViewStyle">@style/Theme.MiniStockbit.DefaultTextView</item>
-    </style>
-
-    <style name="Theme.MiniStockbit.DefaultTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textViewStyle">@style/DefaultTextView.Light</item>
+        <item name="socialButtonStyle">@style/SocialButton.Light</item>
+        <item name="parentBackgroundColor">@color/white</item>
     </style>
 </resources>

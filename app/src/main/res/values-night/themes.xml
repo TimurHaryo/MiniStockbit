@@ -13,5 +13,8 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
         <!-- Customize your theme here. -->
+        <item name="android:textViewStyle">@style/DefaultTextView.Night</item>
+        <item name="socialButtonStyle">@style/SocialButton.Night</item>
+        <item name="parentBackgroundColor">@color/black</item>
     </style>
 </resources>
