@@ -76,6 +76,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnRefreshPage"
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="@dimen/size_0dp"
+        android:visibility="gone"
+        android:padding="@dimen/size_12dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
+        app:layout_constraintTop_toTopOf="@id/progressBar"
+        app:tint="@color/grey_shady"
+        app:srcCompat="@drawable/ic_reload"/>
+
     <include
         android:id="@+id/layoutTopTierError"
         layout="@layout/layout_error"
