@@ -6,9 +6,9 @@ import id.timtam.core.vo.Either
 import id.timtam.ministockbit.domain.model.TopTierVolume
 import id.timtam.ministockbit.domain.repository.TopTierVolumeRepository
 
-class GetTopTierVolume(
+class GetTopTierVolumeUseCase(
     private val repository: TopTierVolumeRepository
-) : UseCase<List<TopTierVolume>, GetTopTierVolume.Query>() {
+) : UseCase<List<TopTierVolume>, GetTopTierVolumeUseCase.Query>() {
 
     data class Query(
         val page: Int,
