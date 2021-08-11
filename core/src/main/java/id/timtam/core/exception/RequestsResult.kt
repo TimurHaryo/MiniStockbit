@@ -1,9 +1,8 @@
 package id.timtam.core.exception
 
-enum class RequestsResult {
-    DATA_NOT_MATCH,
-    NO_CONNECTION,
-    TIMEOUT,
-    SERVER_ERROR,
-    UNKNOWN_ERROR
+object RequestsResult {
+    const val NO_CONNECTION = 0
+    const val TIMEOUT = 1
+    const val SERVER_ERROR = 2
+    const val UNKNOWN_ERROR = 3
 }
