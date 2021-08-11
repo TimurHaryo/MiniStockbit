@@ -3,10 +3,11 @@ package id.timtam.core.util
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import id.timtam.core.util.PagingConstants.THRESHOLD_SIZE
 
 abstract class Paginator(recyclerViewLayout: RecyclerView.LayoutManager?) : RecyclerView.OnScrollListener() {
 
-    private var startPage: Long = START_PAGE
+    private var startPage: Int = START_PAGE
 
     private val threshold = THRESHOLD_SIZE
 
@@ -16,12 +17,12 @@ abstract class Paginator(recyclerViewLayout: RecyclerView.LayoutManager?) : Recy
 
     private val layoutManager: RecyclerView.LayoutManager? = recyclerViewLayout
 
-    private val currentPage: Long
+    private val currentPage: Int
         get() = ++startPage
 
     abstract val isLastPage: Boolean
 
-    abstract fun loadMore(page: Long)
+    abstract fun loadMore(page: Int)
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
@@ -57,10 +58,7 @@ abstract class Paginator(recyclerViewLayout: RecyclerView.LayoutManager?) : Recy
     }
 
     companion object {
-        private const val START_PAGE = 1L
-
-        const val BATCH_SIZE = 10L
-        const val THRESHOLD_SIZE = 2
+        private const val START_PAGE = 1
     }
 
 }
