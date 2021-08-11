@@ -33,7 +33,7 @@ class TopTierRepositoryTest : ShouldSpec({
         unmockkAll()
     }
 
-    context("Re") {
+    context("get top tier from data source") {
         val fakePage = faker.int
         val fakeLimit = faker.int
         val query: Map<String, String> = mapOf(
@@ -41,11 +41,11 @@ class TopTierRepositoryTest : ShouldSpec({
             "limit" to fakeLimit.toString(),
             "tsym" to "USD"
         )
-        val fakeResponse: TotalTopTierResponse = mockk()
 
         should("success get top tier scenario to domain model") {
             // Given
             val fakeResult: List<TopTierVolume> = mockk()
+            val fakeResponse: TotalTopTierResponse = mockk()
 
             every { topTierMapper.map(any()) } returns fakeResult
             coEvery { remoteDataSource.getTotalTopTier(query) } returns Either.Success(fakeResponse)
