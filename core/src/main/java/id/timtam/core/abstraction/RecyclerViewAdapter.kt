@@ -22,7 +22,7 @@ abstract class RecyclerViewAdapter<Holder : RecyclerView.ViewHolder, Data> :
         notifyDataSetChanged()
     }
 
-    fun clear() {
+    fun clearData() {
         listData.clear()
         notifyDataSetChanged()
     }

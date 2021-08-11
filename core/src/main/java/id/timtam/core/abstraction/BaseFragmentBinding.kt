@@ -37,7 +37,7 @@ abstract class BaseFragmentBinding<T: ViewBinding> : Fragment() {
             doWhenCreated()
         }
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            doWhenDisplayed()
+            doOnceWhenDisplayed()
         }
     }
 
@@ -49,7 +49,7 @@ abstract class BaseFragmentBinding<T: ViewBinding> : Fragment() {
 
     protected abstract fun doWhenCreated()
 
-    protected open fun doWhenDisplayed() {  }
+    protected open fun doOnceWhenDisplayed() {  }
 
     protected open fun toBeCleared() {  }
 
