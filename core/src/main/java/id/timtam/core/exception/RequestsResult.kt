@@ -5,7 +5,5 @@ enum class RequestsResult {
     NO_CONNECTION,
     TIMEOUT,
     SERVER_ERROR,
-    UNKNOWN_ERROR,
-    NOT_DEFINED,
-    BAD_RESPONSE
+    UNKNOWN_ERROR
 }
