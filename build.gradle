@@ -15,6 +15,8 @@ buildscript {
         glide_version = '4.12.0'
         timber_version = "1.5.1"
         koin_version= "3.1.2"
+        kotest_version = "4.4.3"
+        mockk_version = "1.11.0"
     }
     repositories {
         google()
