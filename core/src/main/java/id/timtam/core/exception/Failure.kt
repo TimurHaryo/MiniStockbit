@@ -1,6 +1,6 @@
 package id.timtam.core.exception
 
 data class Failure(
-    val requestsResult: RequestsResult,
+    val requestsResult: Int,
     val throwable: Throwable
 )
