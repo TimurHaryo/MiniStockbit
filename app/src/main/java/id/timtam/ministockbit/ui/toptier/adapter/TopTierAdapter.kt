@@ -27,8 +27,14 @@ class TopTierAdapter : RecyclerViewAdapter<TopTierAdapter.TopTierViewHolder, Top
         ViewHolder<ItemTierVolumeBinding, TopTierVolume>(itemView) {
 
         override fun bind(data: TopTierVolume) {
-            binding.root.setOnClickListener {
-                onClick?.invoke(data)
+            with(binding) {
+                tvTierName.text = data.name
+                tvTierFullName.text = data.fullName
+                tvTierPrice.text = data.price
+
+                root.setOnClickListener {
+                    onClick?.invoke(data)
+                }
             }
         }
     }

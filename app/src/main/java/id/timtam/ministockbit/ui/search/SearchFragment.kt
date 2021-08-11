@@ -14,7 +14,7 @@ class SearchFragment : BaseFragmentBinding<FragmentSearchBinding>() {
         d { "FRAG: Created" }
     }
 
-    override fun doWhenDisplayed() {
+    override fun doOnceWhenDisplayed() {
         d { "FRAG: Resumed/Displayed" }
     }
 }

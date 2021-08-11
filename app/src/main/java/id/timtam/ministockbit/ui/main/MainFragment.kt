@@ -28,7 +28,7 @@ class MainFragment : BaseFragmentBinding<FragmentMainBinding>() {
         setupFragmentContainer()
     }
 
-    override fun doWhenDisplayed() {
+    override fun doOnceWhenDisplayed() {
         d { "FRAG: Resumed/Displayed" }
     }
 
