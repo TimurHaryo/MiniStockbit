@@ -1,5 +1,7 @@
 package id.timtam.ministockbit.data.repository
 
+import id.timtam.core.exception.Failure
+import id.timtam.core.exception.RequestsResult
 import id.timtam.core.vo.Either
 import id.timtam.ministockbit.data.remote.mapper.TopTierMapper
 import id.timtam.ministockbit.data.remote.response.TotalTopTierResponse
@@ -31,7 +33,7 @@ class TopTierRepositoryTest : ShouldSpec({
         unmockkAll()
     }
 
-    context("get top tier") {
+    context("get top tier from data source") {
         val fakePage = faker.int
         val fakeLimit = faker.int
         val query: Map<String, String> = mapOf(
@@ -41,7 +43,7 @@ class TopTierRepositoryTest : ShouldSpec({
         )
         val fakeResponse: TotalTopTierResponse = mockk()
 
-        should("success scenario") {
+        should("get top success scenario to domain model") {
             // Given
             val fakeResult: List<TopTierVolume> = mockk()
 
@@ -57,11 +59,22 @@ class TopTierRepositoryTest : ShouldSpec({
             verify { topTierMapper.map(fakeResponse) }
         }
 
-//        should("failed scenario") {
-//            // Given
-//            // When
-//            // Then
-//        }
+        should("get top failed scenario to domain model") {
+            // Given
+            val fakeMessage = faker.string
+            val fakeThrowable = Throwable(fakeMessage)
+            val fakeFailure = Failure(RequestsResult.SERVER_ERROR, fakeThrowable)
+
+            coEvery { remoteDataSource.getTotalTopTier(query) } returns Either.Error(fakeFailure)
+
+            // When
+            val result = topTierRepository.getTotalTopTier(query)
+
+            // Then
+            if (result is Either.Error) {
+                result.failure.throwable.message shouldBe fakeMessage
+            }
+        }
     }
 
 })
