@@ -81,6 +81,7 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
                 }
                 is TopTierViewModel.TopTierUI.Failed -> {
                     with(binding) {
+                        topTierAdapter.clearData()
                         swipeRefreshLayout.disable()
                         progressBar.gone()
                         layoutTopTierError.root.visible()
