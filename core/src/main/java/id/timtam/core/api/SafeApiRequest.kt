@@ -31,10 +31,10 @@ open class SafeApiRequest : ApiRequest {
         } catch (throwable: Throwable) {
             when(throwable) {
                 is UnknownHostException -> parseError(
-                    Failure(RequestsResult.SERVER_ERROR,Throwable("Network problem"))
+                    Failure(RequestsResult.NO_CONNECTION,Throwable("Network problem"))
                 )
                 is ConnectException -> parseError(
-                    Failure(RequestsResult.SERVER_ERROR,throwable)
+                    Failure(RequestsResult.NO_CONNECTION,throwable)
                 )
                 is SocketTimeoutException -> parseError(
                     Failure(RequestsResult.TIMEOUT,throwable)
