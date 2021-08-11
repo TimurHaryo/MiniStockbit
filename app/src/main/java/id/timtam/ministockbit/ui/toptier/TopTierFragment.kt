@@ -8,6 +8,7 @@ import id.timtam.core.abstraction.BaseFragmentBinding
 import id.timtam.core.extension.*
 import id.timtam.core.util.Paginator
 import id.timtam.core.util.PagingConstants
+import id.timtam.ministockbit.R
 import id.timtam.ministockbit.databinding.FragmentTopTierBinding
 import id.timtam.ministockbit.domain.model.TopTierVolume
 import id.timtam.ministockbit.ui.toptier.adapter.TopTierAdapter
@@ -65,28 +66,37 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
         vm.uiState.observe(viewLifecycleOwner, { state ->
             when(state) {
                 is TopTierViewModel.TopTierUI.Loading -> {
-                    with(binding) {
-                        swipeRefreshLayout.disable()
-                        layoutTopTierError.root.gone()
-                        progressBar.visible()
-                    }
+                    startLoading()
                 }
                 is TopTierViewModel.TopTierUI.Success -> {
+                    stopLoading()
                     with(binding) {
                         swipeRefreshLayout.enable()
                         layoutTopTierError.root.gone()
-                        progressBar.gone()
                     }
                     putTopTierResultData(state.data)
                 }
-                is TopTierViewModel.TopTierUI.Failed -> {
+                is TopTierViewModel.TopTierUI.FailedLoadInitial -> {
+                    stopLoading()
                     with(binding) {
                         topTierAdapter.clearData()
                         swipeRefreshLayout.disable()
-                        progressBar.gone()
                         layoutTopTierError.root.visible()
                         layoutTopTierError.btnRetry.setOnClickListener {
                             renewData()
+                        }
+                    }
+                    e { "${state.failure.throwable.message}" }
+                }
+                is TopTierViewModel.TopTierUI.FailedLoadMore -> {
+                    stopLoading()
+                    toast(getString(R.string.text_error_message))
+                    with(binding) {
+                        progressBar.invisible()
+                        swipeRefreshLayout.enable()
+                        btnRefreshPage.visible()
+                        btnRefreshPage.setOnClickListener {
+                            updateData(state.lastPage)
                         }
                     }
                     e { "${state.failure.throwable.message}" }
@@ -96,14 +106,15 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
     }
 
     private fun renewData() {
-        binding.swipeRefreshLayout.isRefreshing = false
-        paginator?.reset()
         topTierAdapter.clearData()
-        updateData(1)
+        paginator?.reset()
+        vm.reset()
+        vm.loadFirstTier(PagingConstants.BATCH_SIZE)
+        binding.swipeRefreshLayout.isRefreshing = false
     }
 
     private fun updateData(page: Int) {
-        vm.loadBook(page, PagingConstants.BATCH_SIZE)
+        vm.loadMoreTier(page, PagingConstants.BATCH_SIZE)
     }
 
     private fun putTopTierResultData(data: List<TopTierVolume>) {
@@ -120,6 +131,19 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
             adapter = topTierAdapter
             setHasFixedSize(true)
         }
+    }
+
+    private fun startLoading() {
+        with(binding) {
+            swipeRefreshLayout.disable()
+            layoutTopTierError.root.gone()
+            btnRefreshPage.gone()
+            progressBar.visible()
+        }
+    }
+
+    private fun stopLoading() {
+        binding.progressBar.gone()
     }
 
 }

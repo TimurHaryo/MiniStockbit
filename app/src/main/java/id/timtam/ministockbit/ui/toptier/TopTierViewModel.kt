@@ -21,7 +21,8 @@ class TopTierViewModel(
     sealed class TopTierUI {
         object Loading: TopTierUI()
         data class Success(val data: List<TopTierVolume>): TopTierUI()
-        data class Failed(val failure: Failure): TopTierUI()
+        data class FailedLoadInitial(val failure: Failure): TopTierUI()
+        data class FailedLoadMore(val failure: Failure, val lastPage: Int): TopTierUI()
     }
 
     override var dataSize: Int = -1
@@ -30,7 +31,34 @@ class TopTierViewModel(
         return (PagingConstants.BATCH_SIZE > dataSize) && (dataSize != -1)
     }
 
-    fun loadBook(page: Int, limit: Int) {
+    override fun reset() {
+        dataSize = -1
+    }
+
+    fun loadFirstTier(limit: Int) {
+        _uiState.value = TopTierUI.Loading
+        viewModelScope.launch(dispatcherProvider.io) {
+            val param = GetTopTierVolumeUseCase.Query(
+                page = 1,
+                limit = limit
+            )
+
+            getTopTierVolumeUseCase.run(param)
+                .onSuccess {
+                    withContext(dispatcherProvider.main) {
+                        dataSize = it.size
+                        _uiState.value = TopTierUI.Success(it)
+                    }
+                }
+                .onError {
+                    withContext(dispatcherProvider.main) {
+                        _uiState.value = TopTierUI.FailedLoadInitial(it)
+                    }
+                }
+        }
+    }
+
+    fun loadMoreTier(page: Int, limit: Int) {
         _uiState.value = TopTierUI.Loading
         viewModelScope.launch(dispatcherProvider.io) {
             val param = GetTopTierVolumeUseCase.Query(
@@ -41,12 +69,15 @@ class TopTierViewModel(
             getTopTierVolumeUseCase.run(param)
                 .onSuccess {
                     withContext(dispatcherProvider.main) {
+                        dataSize = it.size
                         _uiState.value = TopTierUI.Success(it)
                     }
                 }
                 .onError {
                     withContext(dispatcherProvider.main) {
-                        _uiState.value = TopTierUI.Failed(it)
+                        if (page != 1 && dataSize != -1) {
+                            _uiState.value = TopTierUI.FailedLoadMore(it, page)
+                        }
                     }
                 }
         }

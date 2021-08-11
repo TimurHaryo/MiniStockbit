@@ -38,6 +38,8 @@ abstract class Paginator(recyclerViewLayout: RecyclerView.LayoutManager?) : Recy
             firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
         }
 
+        if (firstVisibleItemPosition == 0) return
+
         if (isLastPage) return
 
         if (isLoading) {
@@ -55,6 +57,8 @@ abstract class Paginator(recyclerViewLayout: RecyclerView.LayoutManager?) : Recy
 
     fun reset() {
         startPage = START_PAGE
+        previousTotal = 0
+        isLoading = false
     }
 
     companion object {
