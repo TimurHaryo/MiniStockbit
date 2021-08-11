@@ -11,7 +11,14 @@
 
     <color name="grey_shady">#969696</color>
     <color name="grey_smoke">#EDEDED</color>
+    <color name="grey_night_rider">#FF333333</color>
 
+    <color name="black_nightly">#121212</color>
     <color name="black">#FF000000</color>
+
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
+
+<!--    Overriding for inactive border color of TextInputLayout-->
+    <color name="mtrl_textinput_default_box_stroke_color">@color/grey_shady</color>
 </resources>

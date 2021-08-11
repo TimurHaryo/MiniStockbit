@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SocialButton.Light" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="android:textColor">@color/grey_night_rider</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingTop">@dimen/size_8dp</item>
+        <item name="android:paddingBottom">@dimen/size_8dp</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="strokeColor">@color/grey_smoke</item>
+        <item name="strokeWidth">@dimen/size_1dp</item>
+        <item name="iconGravity">start</item>
+        <item name="iconSize">@dimen/size_24dp</item>
+        <item name="iconTint">@color/transparent</item>
+        <item name="iconTintMode">add</item>
+    </style>
+
+    <style name="SocialButton.Night" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="android:textColor">@color/grey_smoke</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingTop">@dimen/size_8dp</item>
+        <item name="android:paddingBottom">@dimen/size_8dp</item>
+        <item name="backgroundTint">@color/black</item>
+        <item name="strokeColor">@color/grey_shady</item>
+        <item name="strokeWidth">@dimen/size_1dp</item>
+        <item name="iconGravity">start</item>
+        <item name="iconSize">@dimen/size_24dp</item>
+        <item name="iconTint">@color/transparent</item>
+        <item name="iconTintMode">add</item>
+    </style>
+
+    <style name="BigButton.Solid" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingTop">@dimen/size_12dp</item>
+        <item name="android:paddingBottom">@dimen/size_12dp</item>
+    </style>
+
+    <style name="BigButton.Border" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="android:textColor">@color/green_jade</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingTop">@dimen/size_12dp</item>
+        <item name="android:paddingBottom">@dimen/size_12dp</item>
+        <item name="strokeColor">@color/green_jade</item>
+        <item name="strokeWidth">@dimen/size_1dp</item>
+        <item name="backgroundTint">?attr/parentBackgroundColor</item>
+    </style>
+
+</resources>

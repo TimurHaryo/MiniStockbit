@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DefaultTextView.Light" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="DefaultTextView.Night" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="H5" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:textSize">@dimen/text_size_18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">@dimen/line_height_24dp</item>
+    </style>
+
+    <style name="H6" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+        <item name="lineHeight">@dimen/line_height_24dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Body1" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="lineHeight">@dimen/line_height_18dp</item>
+    </style>
+
+    <style name="Body1.Bold" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">@dimen/line_height_18dp</item>
+    </style>
+
+    <style name="Caption" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+        <item name="lineHeight">@dimen/line_height_18dp</item>
+    </style>
+
+</resources>

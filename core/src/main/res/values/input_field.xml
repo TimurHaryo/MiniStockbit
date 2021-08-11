@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="InputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="colorAccent">@color/green_jade</item>
+        <item name="boxStrokeColor">@color/green_jade</item>
+        <item name="hintTextColor">@color/green_jade</item>
+    </style>
+
+</resources>
