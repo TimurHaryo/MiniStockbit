@@ -1,7 +1,6 @@
 package id.timtam.ministockbit.data.repository
 
 import id.timtam.core.exception.Failure
-import id.timtam.core.exception.RequestsResult
 import id.timtam.core.vo.Either
 import id.timtam.ministockbit.data.remote.mapper.TopTierMapper
 import id.timtam.ministockbit.data.remote.response.TotalTopTierResponse
@@ -63,8 +62,8 @@ class TopTierRepositoryTest : ShouldSpec({
             // Given
             val fakeMessage = faker.string
             val fakeThrowable = Throwable(fakeMessage)
-            mockkObject(RequestsResult.SERVER_ERROR)
-            val fakeFailure = Failure(RequestsResult.SERVER_ERROR, fakeThrowable)
+            val fakeCode = faker.int
+            val fakeFailure = Failure(fakeCode, fakeThrowable)
 
             coEvery { remoteDataSource.getTotalTopTier(query) } returns Either.Error(fakeFailure)
 
