@@ -7,6 +7,7 @@ import id.timtam.ministockbit.data.remote.response.TotalTopTierResponse
 import id.timtam.ministockbit.data.remote.service.ApiService
 import id.timtam.ministockbit.data.remote.source.RemoteDataSource
 import id.timtam.ministockbit.helper.Faker
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.ShouldSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.*
@@ -64,6 +65,22 @@ class RemoteDataSourceTest : ShouldSpec({
             // Then
             response shouldBe Either.Success(fakeResult)
             coVerify { apiService.getTotalTopTier(query) }
+        }
+
+        should("error calling response from API") {
+            // Given
+            val fakeMessage = faker.string
+            val fakeCode = faker.int
+
+            every { fakeResponse.isSuccessful } returns false
+            every { fakeResponse.message() } returns fakeMessage
+            every { fakeResponse.code() } returns fakeCode
+
+            // When
+            val response = remoteDataSource.getTotalTopTier(query)
+
+            // Then
+            (response as Either.Error).failure.throwable.message shouldBe fakeMessage
         }
     }
 
