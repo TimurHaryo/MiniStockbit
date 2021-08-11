@@ -63,6 +63,7 @@ class TopTierRepositoryTest : ShouldSpec({
             // Given
             val fakeMessage = faker.string
             val fakeThrowable = Throwable(fakeMessage)
+            mockkObject(RequestsResult.SERVER_ERROR)
             val fakeFailure = Failure(RequestsResult.SERVER_ERROR, fakeThrowable)
 
             coEvery { remoteDataSource.getTotalTopTier(query) } returns Either.Error(fakeFailure)
@@ -71,9 +72,7 @@ class TopTierRepositoryTest : ShouldSpec({
             val result = topTierRepository.getTotalTopTier(query)
 
             // Then
-            if (result is Either.Error) {
-                result.failure.throwable.message shouldBe fakeMessage
-            }
+            result shouldBe Either.Error(fakeFailure)
         }
     }
 
