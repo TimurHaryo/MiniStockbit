@@ -21,10 +21,6 @@ class LoginFragment : BaseFragmentBinding<FragmentLoginBinding>() {
         }
     }
 
-    override fun doOnceWhenDisplayed() {
-        d { "FRAG: Resumed/Displayed" }
-    }
-
     private fun goToMain() {
         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
     }

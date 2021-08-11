@@ -28,10 +28,6 @@ class MainFragment : BaseFragmentBinding<FragmentMainBinding>() {
         setupFragmentContainer()
     }
 
-    override fun doOnceWhenDisplayed() {
-        d { "FRAG: Resumed/Displayed" }
-    }
-
     private fun setupBottomNavigation() {
         with(binding) {
             bottomNavMain.setOnItemSelectedListener { menuItem ->
