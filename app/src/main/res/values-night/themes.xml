@@ -16,5 +16,6 @@
         <item name="android:textViewStyle">@style/DefaultTextView.Night</item>
         <item name="socialButtonStyle">@style/SocialButton.Night</item>
         <item name="parentBackgroundColor">@color/black</item>
+        <item name="baseLogoSource">@drawable/stockbit_white</item>
     </style>
 </resources>

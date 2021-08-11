@@ -13,7 +13,12 @@ class LoginFragment : BaseFragmentBinding<FragmentLoginBinding>() {
 
     override fun doWhenCreated() {
         d { "FRAG: Created" }
-        binding.btnLogin.setOnClickListener { goToMain() }
+        with(binding) {
+            btnLoginGoogle.setOnClickListener { goToMain() }
+            btnLoginFacebook.setOnClickListener { goToMain() }
+            btnLogin.setOnClickListener { goToMain() }
+            btnLoginWithFingerprint.setOnClickListener { goToMain() }
+        }
     }
 
     override fun doWhenDisplayed() {

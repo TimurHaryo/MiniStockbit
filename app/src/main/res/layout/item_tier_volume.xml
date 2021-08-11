@@ -30,7 +30,6 @@
         android:id="@+id/tvTierPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tvTierName"
         app:layout_constraintEnd_toEndOf="parent"

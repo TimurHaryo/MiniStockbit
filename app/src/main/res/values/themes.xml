@@ -16,5 +16,6 @@
         <item name="android:textViewStyle">@style/DefaultTextView.Light</item>
         <item name="socialButtonStyle">@style/SocialButton.Light</item>
         <item name="parentBackgroundColor">@color/white</item>
+        <item name="baseLogoSource">@drawable/stockbit</item>
     </style>
 </resources>

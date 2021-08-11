@@ -2,4 +2,5 @@
 <resources>
     <attr name="socialButtonStyle" format="reference"/>
     <attr name="parentBackgroundColor" format="color"/>
+    <attr name="baseLogoSource" format="reference"/>
 </resources>

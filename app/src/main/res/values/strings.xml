@@ -15,4 +15,6 @@
     <string name="login_with_fingerprint">Login with Fingerprint</string>
     <string name="text_dont_have_account">Don\'t have an account?</string>
     <string name="text_join_now">Join Now</string>
+    <string name="btn_retry">Tap to Retry</string>
+    <string name="text_error_message">Oooppss...Something went wrong</string>
 </resources>

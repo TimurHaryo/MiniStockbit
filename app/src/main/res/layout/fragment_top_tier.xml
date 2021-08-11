@@ -1,11 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?parentBackgroundColor"
     tools:context=".ui.toptier.TopTierFragment">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnSideMenu"
+        android:layout_width="@dimen/size_40dp"
+        android:layout_height="@dimen/size_40dp"
+        android:layout_marginStart="@dimen/size_12dp"
+        android:layout_marginTop="@dimen/size_12dp"
+        android:padding="@dimen/size_8dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvLoginHeader"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_hamburger_menu"
+        app:tint="@color/grey_shady" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/tvLoginHeader"
+        android:layout_width="@dimen/size_88dp"
+        android:layout_height="@dimen/size_40dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/btnNotification"
+        app:layout_constraintStart_toEndOf="@+id/btnSideMenu"
+        app:layout_constraintTop_toTopOf="@+id/btnSideMenu"
+        app:srcCompat="?attr/baseLogoSource" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnNotification"
+        android:layout_width="@dimen/size_40dp"
+        android:layout_height="@dimen/size_40dp"
+        android:layout_marginEnd="@dimen/size_12dp"
+        android:padding="@dimen/size_8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/tvLoginHeader"
+        app:layout_constraintTop_toTopOf="@+id/btnSideMenu"
+        app:srcCompat="@drawable/ic_notification"
+        app:tint="@color/grey_shady" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="@dimen/size_0dp"
+        android:layout_height="@dimen/size_0dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        app:layout_constraintBottom_toTopOf="@id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginHeader">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTopTier"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="@dimen/size_0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_tier_volume"
+            tools:itemCount="3"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_16dp"
+        android:visibility="gone"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <include
+        android:id="@+id/layoutTopTierError"
+        layout="@layout/layout_error"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/swipeRefreshLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

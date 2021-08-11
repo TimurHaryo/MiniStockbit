@@ -13,6 +13,7 @@
     <dimen name="size_28dp">28dp</dimen>
     <dimen name="size_32dp">32dp</dimen>
     <dimen name="size_40dp">40dp</dimen>
+    <dimen name="size_88dp">88dp</dimen>
     <dimen name="size_160dp">160dp</dimen>
 
     <dimen name="text_size_12sp">12sp</dimen>
