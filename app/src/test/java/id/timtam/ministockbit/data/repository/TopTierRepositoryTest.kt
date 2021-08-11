@@ -33,7 +33,7 @@ class TopTierRepositoryTest : ShouldSpec({
         unmockkAll()
     }
 
-    context("get top tier from data source") {
+    context("Re") {
         val fakePage = faker.int
         val fakeLimit = faker.int
         val query: Map<String, String> = mapOf(
@@ -43,7 +43,7 @@ class TopTierRepositoryTest : ShouldSpec({
         )
         val fakeResponse: TotalTopTierResponse = mockk()
 
-        should("get top success scenario to domain model") {
+        should("get top tier success scenario to domain model") {
             // Given
             val fakeResult: List<TopTierVolume> = mockk()
 
@@ -59,7 +59,7 @@ class TopTierRepositoryTest : ShouldSpec({
             verify { topTierMapper.map(fakeResponse) }
         }
 
-        should("get top failed scenario to domain model") {
+        should("get top tier failed scenario to domain model") {
             // Given
             val fakeMessage = faker.string
             val fakeThrowable = Throwable(fakeMessage)
