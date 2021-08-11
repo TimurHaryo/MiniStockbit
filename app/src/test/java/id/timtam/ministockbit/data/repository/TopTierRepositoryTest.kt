@@ -43,7 +43,7 @@ class TopTierRepositoryTest : ShouldSpec({
         )
         val fakeResponse: TotalTopTierResponse = mockk()
 
-        should("get top tier success scenario to domain model") {
+        should("success get top tier scenario to domain model") {
             // Given
             val fakeResult: List<TopTierVolume> = mockk()
 
@@ -59,7 +59,7 @@ class TopTierRepositoryTest : ShouldSpec({
             verify { topTierMapper.map(fakeResponse) }
         }
 
-        should("get top tier failed scenario to domain model") {
+        should("error get top tier scenario to domain model") {
             // Given
             val fakeMessage = faker.string
             val fakeThrowable = Throwable(fakeMessage)
