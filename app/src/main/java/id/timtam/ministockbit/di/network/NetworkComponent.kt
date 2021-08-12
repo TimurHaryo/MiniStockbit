@@ -37,7 +37,7 @@ val networkDependency = module {
 
     single<Retrofit> {
         Retrofit.Builder()
-            .baseUrl("https://min-api.cryptocompare.com/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(get()))
             .client(get())
             .build()
