@@ -2,6 +2,7 @@ package id.timtam.ministockbit.ui.toptier
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.ajalt.timberkt.d
 import com.github.ajalt.timberkt.e
 import id.timtam.core.abstraction.BaseFragmentBinding
@@ -29,16 +30,13 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
     override fun doWhenCreated() {
         d { "FRAG: Created" }
         observeData()
-        setPaginator()
-
-        with(binding.rvTopTier) {
-            setTopTierResultAction()
-            paginator?.let { addOnScrollListener(it) }
-        }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             renewData()
         }
+
+        setTopTierResultAction()
+        setPaginator()
     }
 
     override fun doOnceWhenDisplayed() {
@@ -52,14 +50,9 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
     }
 
     private fun setPaginator() {
-        paginator = object : Paginator(binding.rvTopTier.layoutManager) {
-            override val isLastPage: Boolean
-                get() = vm.isLastPage()
-
-            override fun loadMore(page: Int) {
-                updateData(page)
-            }
-        }
+        paginator = Paginator(binding.rvTopTier.layoutManager as LinearLayoutManager)
+        paginator?.setOnLoadMoreListener { updateData(it) }
+        paginator?.let { binding.rvTopTier.addOnScrollListener(it) }
     }
 
     private fun observeData() {
