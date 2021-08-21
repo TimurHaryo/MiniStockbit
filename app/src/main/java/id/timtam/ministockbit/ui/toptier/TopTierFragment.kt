@@ -101,7 +101,6 @@ class TopTierFragment : BaseFragmentBinding<FragmentTopTierBinding>() {
     private fun renewData() {
         topTierAdapter.clearData()
         paginator?.reset()
-        vm.reset()
         vm.loadFirstTier(PagingConstants.BATCH_SIZE)
         binding.swipeRefreshLayout.isRefreshing = false
     }
